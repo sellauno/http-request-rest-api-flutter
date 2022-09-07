@@ -17,6 +17,12 @@ class MovieDetail extends StatelessWidget {
       path =
           'https:/images.freeimages.com/images/large-previews/5eb/movie-clapboard-1184339.jpg';
     }
+    if (movie.posterPath != null) {
+      poster = imgPath + movie.posterPath;
+    } else {
+      poster =
+          'https:/images.freeimages.com/images/large-previews/5eb/movie-clapboard-1184339.jpg';
+    }
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +38,23 @@ class MovieDetail extends StatelessWidget {
                 child: Image.network(path),
               ),
               Container(
-                child: Text(movie.overview, style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                padding: EdgeInsets.only(left: 20, right: 16, bottom: 10),
+                child: Row(
+                  children: [
+                    Image.network(poster, width: 40),
+                    Text(
+                      "  " + movie.title,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Text(movie.overview,
+                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
                 width: 450,
                 padding: EdgeInsets.only(left: 20, right: 16),
               ),

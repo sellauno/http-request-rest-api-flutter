@@ -17,4 +17,5 @@ A new Flutter project.
 ![Screenshot](images/7.5-4.PNG)
 
 - Modifikasi Tampilan
-![Screenshot](images/7.5-5.PNG)
+![Screenshot](images/7.5-5a.PNG)
+![Screenshot](images/7.5-5b.PNG)
