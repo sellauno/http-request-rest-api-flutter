@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http_request_rest_api_flutter/service/http_service.dart';
+import 'package:http_request_rest_api_flutter/service/http_service.dart';
 
 class MovieList extends StatefulWidget {
   @override
@@ -7,27 +8,56 @@ class MovieList extends StatefulWidget {
 }
 
 class _MovieListState extends State<MovieList> {
-  String result = "";
+  late int moviesCount;
+  late List movies;
   late HttpService service;
+  String imgPath = 'https://image.tmdb.org/t/p/w500';
+
+  Future initialize() async {
+    movies = (await service.getPopularMovies())!;
+    setState(() {
+      moviesCount = movies.length;
+      movies = movies;
+    });
+  }
 
   @override
-  void initState(){
+  void initState() {
     service = HttpService();
+    initialize();
     super.initState();
   }
+
   Widget build(BuildContext context) {
-    service.getPopularMovies().then((value) => {
-      setState((){
-        result = value;
-      })
-    });
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Popular Movues"),
-      ),
-      body: Container(
-        child: Text(result),
-      ),
-    );
-    }
+        appBar: AppBar(
+          title: Text("Popular Movies"),
+        ),
+        body: ListView.builder(
+          itemCount: this.moviesCount,
+          itemBuilder: (context, int position) {
+            return Card(
+              color: Colors.white,
+              elevation: 2.0,
+              child: Row(children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network(
+                    imgPath + movies[position].posterPath,
+                    width: 60,
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: Text(movies[position].title),
+                    subtitle: Text(
+                      "Rating = " + movies[position].voteAverage.toString(),
+                    ),
+                  ),
+                ),
+              ]),
+            );
+          },
+        ));
+  }
 }
