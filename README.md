@@ -11,3 +11,10 @@ A new Flutter project.
 
 - Menampilkan Gambar
 ![Screenshot](images/7.4-6.PNG)
+
+## 7.5 Membuat halaman detail Populer Movie 
+- Detail Populer Movie
+![Screenshot](images/7.5-4.PNG)
+
+- Modifikasi Tampilan
+![Screenshot](images/7.5-5.PNG)
